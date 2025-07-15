@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Raagvaani – Indian AI Music Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #3e3e3e;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+    textarea, select, button {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #ff5722;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #e64a19;
+    }
+    audio {
+      margin-top: 2rem;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎶 Raagvaani – Desi AI Song Generator</h1>
+    
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="prompt">🎤 Song Theme or Mood:</label>
+      <textarea id="prompt" name="prompt" rows="3" placeholder="e.g., Sad love song about betrayal"></textarea>
+
+      <label for="genre">🎼 Genre:</label>
+      <select id="genre" name="genre">
+        <option value="hindi">Hindi</option>
+        <option value="bollywood">Bollywood</option>
+        <option value="punjabi">Punjabi</option>
+        <option value="haryanvi">Haryanvi</option>
+        <option value="marwari">Marwari</option>
+      </select>
+
+      <button type="submit">Generate Song 🎵</button>
+    </form>
+
+    {% if audio_url %}
+      <h2>🔊 Your AI Song:</h2>
+      <audio controls>
+        <source src="{{ audio_url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    {% endif %}
+  </div>
+</body>
+</html>
