@@ -3,6 +3,7 @@ import openai
 from django.shortcuts import render
 from django.conf import settings
 from dotenv import load_dotenv
+from .bark_wrapper import generate_bark_audio
 
 # Load environment variables
 load_dotenv()
