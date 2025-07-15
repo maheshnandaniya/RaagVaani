@@ -1,0 +1,6 @@
+Django>=4.0
+torch
+transformers
+ffmpeg-python
+python-dotenv
+openai
