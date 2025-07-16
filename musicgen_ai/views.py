@@ -30,6 +30,15 @@ def index(request):
         music_path = f"media/{uuid.uuid4().hex}_music"
         music_output = generate_music(f"{genre} instrumental {prompt}", output_path=music_path)
         # Bark audio generation code will go here later
+        voice = request.POST.get("voice", "female")
+
+    # Map to Bark's speaker preset
+    speaker_map = {
+        "female": "v2/en_speaker_6",
+        "male": "v2/en_speaker_1"
+    }
+
+    selected_speaker = speaker_map.get(voice, "v2/en_speaker_6")
         # For now, use dummy placeholder or skip
 
         # Step 4: Dummy test file for now
