@@ -7,6 +7,21 @@ from .bark_wrapper import generate_bark_audio
 from .musicgen_wrapper import generate_music
 from .audio_mixer import merge_audio_tracks
 
+voice_presets = {
+    "v2/en_speaker_0": "Neha AI",
+    "v2/en_speaker_1": "Kishore AI",
+    "v2/en_speaker_2": "Sunidhi AI",
+    "v2/en_speaker_3": "RaagBot Bass",
+    "v2/en_speaker_4": "Shaan AI",
+    "v2/en_speaker_5": "Arijit AI",
+    "v2/en_speaker_6": "Lata AI",
+    "v2/en_speaker_7": "Diljit AI",
+    "v2/en_speaker_8": "RaagBot Female",
+    "v2/en_speaker_9": "Shreya AI",
+    "v2/en_speaker_10": "Rafi AI",
+    "v2/en_speaker_11": "Alka AI"
+}
+
 # Load environment variables
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -33,21 +48,18 @@ def index(request):
         voice = request.POST.get("voice", "female")
 
     # Map to Bark's speaker preset
-    speaker_map = {
-        "female": "v2/en_speaker_6",
-        "male": "v2/en_speaker_1"
-    }
-
-    selected_speaker = speaker_map.get(voice, "v2/en_speaker_6")
-        # For now, use dummy placeholder or skip
+    voice = request.POST.get("voice", "v2/en_speaker_6")  # default: Lata AI
+selected_voice_name = voice_presets.get(voice, "Lata AI")
 
         # Step 4: Dummy test file for now
         audio_url = "/" + final_audio
 
         return render(request, "index.html", {
-            "audio_url": audio_url,
-            "lyrics": lyrics,
-        })
+    "lyrics": lyrics,
+    "audio_url": audio_url,
+    "selected_voice_name": selected_voice_name,
+    "voice_presets": voice_presets  #Pass all to template
+})
 
     return render(request, "index.html")
     
