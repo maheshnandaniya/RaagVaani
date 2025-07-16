@@ -81,10 +81,11 @@
         <option value="folk">Folk</option>
         <option value="soul">Soul</option>
       </select>
-      <label for="voice">🧑‍🎤 Select Voice:</label>
+      <label for="voice">🎤 Choose Your AI Singer:</label>
 <select id="voice" name="voice">
-  <option value="female">Female</option>
-  <option value="male">Male</option>
+  {% for preset, name in voice_presets.items %}
+    <option value="{{ preset }}">{{ name }}</option>
+  {% endfor %}
 </select>
       <button type="submit">Generate Song 🎵</button>
     </form>
@@ -101,5 +102,8 @@
       </audio>
     {% endif %}
   </div>
+  {% if selected_voice_name %}
+  <p>🎙️ Singer: <strong>{{ selected_voice_name }}</strong></p>
+{% endif %}
 </body>
 </html>
