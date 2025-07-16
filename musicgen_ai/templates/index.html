@@ -68,10 +68,27 @@
         <option value="punjabi">Punjabi</option>
         <option value="haryanvi">Haryanvi</option>
         <option value="marwari">Marwari</option>
+        <option value="hiphop">Hip-Hop</option>
+        <option value="rock">Rock</option>
+        <option value="pop">Pop</option>
+        <option value="classical">Classical</option>
+        <option value="country">Country</option>
+        <option value="edm">EDM</option>
+        <option value="rnb">R&B</option>
+        <option value="jazz">Jazz</option>
+        <option value="metal">Metal</option>
+        <option value="blues">Blues</option>
+        <option value="folk">Folk</option>
+        <option value="soul">Soul</option>
       </select>
-
+      <label for="voice">🧑‍🎤 Select Voice:</label>
+<select id="voice" name="voice">
+  <option value="female">Female</option>
+  <option value="male">Male</option>
+</select>
       <button type="submit">Generate Song 🎵</button>
     </form>
+    
     {% if lyrics %}
   <h2>📝 Generated Lyrics:</h2>
   <pre>{{ lyrics }}</pre>
