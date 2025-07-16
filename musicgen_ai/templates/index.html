@@ -82,6 +82,8 @@
         <option value="soul">Soul</option>
       </select>
       <label for="voice">🎤 Choose Your AI Singer:</label>
+      <button type="button" onclick="previewVoice()">🔊 Preview Voice</button>
+<audio id="voice-preview" controls style="display:none; margin-top:10px;"></audio>
 <select id="voice" name="voice">
   {% for preset, name in voice_presets.items %}
     <option value="{{ preset }}">{{ name }}</option>
@@ -106,4 +108,19 @@
   <p>🎙️ Singer: <strong>{{ selected_voice_name }}</strong></p>
 {% endif %}
 </body>
+  <script>
+function previewVoice() {
+  const voice = document.getElementById("voice").value;
+  fetch(`/preview_voice/?voice=${voice}`)
+    .then(res => res.json())
+    .then(data => {
+      const player = document.getElementById("voice-preview");
+      player.src = data.audio_url;
+      player.style.display = "block";
+      player.play();
+    });
+}
+  </script>
+
+  
 </html>
