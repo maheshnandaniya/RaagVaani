@@ -1,6 +1,6 @@
 # 🎶 Raagvaani – Indian AI Music Generator
 
-**Raagvaani** is an AI-powered song generation tool that brings the soul of Indian music into the world of AI. It allows users to generate full songs — lyrics, vocals, and background music — in popular Indian styles like **Hindi**, **Bollywood**, **Punjabi**, **Haryanvi**, and **Marwari**.
+**Raagvaani** is an AI-powered song generation tool that brings the soul of Indian music into the world of AI. It allows users to generate full songs — lyrics, vocals, and background music — in popular Indian styles like **Hindi**, **Bollywood**, **Punjabi**, **Haryanvi**, **Marwari** and so on.
 
 ---
 
@@ -32,3 +32,5 @@
 ```bash
 git clone https://github.com/maheshnandaniya/Raagvaani.git
 cd Raagvaani
+pip install -r requirements.txt
+python manage.py runserver
