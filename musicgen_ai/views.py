@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.conf import settings
 from dotenv import load_dotenv
 from .bark_wrapper import generate_bark_audio
+from .musicgen_wrapper import generate_music
+from .audio_mixer import merge_audio_tracks
 
 # Load environment variables
 load_dotenv()
@@ -24,11 +26,14 @@ def index(request):
             f.write(lyrics)
 
         # Step 3: TODO – Convert lyrics to vocals using Bark (Coming next)
+        # Generate Music
+        music_path = f"media/{uuid.uuid4().hex}_music"
+        music_output = generate_music(f"{genre} instrumental {prompt}", output_path=music_path)
         # Bark audio generation code will go here later
         # For now, use dummy placeholder or skip
 
         # Step 4: Dummy test file for now
-        audio_url = "/static/sample.mp3"
+        audio_url = "/" + final_audio
 
         return render(request, "index.html", {
             "audio_url": audio_url,
@@ -49,3 +54,7 @@ def generate_lyrics(prompt, genre):
         temperature=0.9,
     )
     return response.choices[0].message.content.strip()
+
+
+final_audio = f"media/{uuid.uuid4().hex}_final.wav"
+merge_audio_tracks(audio_path, music_output, final_audio)
