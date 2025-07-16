@@ -1,5 +1,6 @@
 import os
 import openai
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.conf import settings
 from dotenv import load_dotenv
@@ -79,3 +80,16 @@ def generate_lyrics(prompt, genre):
 
 final_audio = f"media/{uuid.uuid4().hex}_final.wav"
 merge_audio_tracks(audio_path, music_output, final_audio)
+
+
+def preview_voice(request):
+    voice = request.GET.get("voice")
+    name = voice_presets.get(voice, "This singer")
+
+    line = f"Hello Raagvaani, I'm {name.replace(' AI', '')} and this is my voice."
+    preview_file = f"media/previews/{name.replace(' ', '_')}.wav"
+
+    if not os.path.exists(preview_file):
+        generate_bark_audio(line, output_path=preview_file, speaker=voice)
+
+    return JsonResponse({"audio_url": "/" + preview_file})
