@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from .bark_wrapper import generate_bark_audio
 from .musicgen_wrapper import generate_music
 from .audio_mixer import merge_audio_tracks
+from .tortoise_wrapper import generate_tortoise_audio
 
 voice_presets = {
     "v2/en_speaker_0": "Neha AI",
@@ -40,6 +41,14 @@ def index(request):
         # Step 2: Save lyrics to .txt for reference (optional)
         with open("last_lyrics.txt", "w", encoding="utf-8") as f:
             f.write(lyrics)
+        voice_model = request.POST.get("voice_model", "bark")  # default: bark
+
+        if voice_model == "bark":
+           audio_path = generate_bark_audio(lyrics, output_path=output_filename, speaker=voice)
+        elif voice_model == "tortoise":
+           audio_path = generate_tortoise_audio(lyrics, output_path=output_filename, voice="pat")
+        else:
+           audio_path = generate_bark_audio(lyrics, output_path=output_filename, speaker=voice)  # fallback
 
         # Step 3: TODO – Convert lyrics to vocals using Bark (Coming next)
         # Generate Music
