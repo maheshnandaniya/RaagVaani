@@ -58,6 +58,11 @@
     
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
+      <label for="voice_model">🧠 Voice Engine:</label>
+<select id="voice_model" name="voice_model">
+  <option value="bark">Bark (Fast, Robotic Singing)</option>
+  <option value="tortoise">Tortoise (Slow, Realistic Singing)</option>
+</select>
       <label for="prompt">🎤 Song Theme or Mood:</label>
       <textarea id="prompt" name="prompt" rows="3" placeholder="e.g., Sad love song about betrayal"></textarea>
 
